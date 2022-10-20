@@ -1,6 +1,6 @@
 const totalLinksModel = require('../model/totalLinks.model')
 const urlModel = require('../model/url.model')
-const shortenUrl = (url) => {
+const shortenUrl = (req, res, next) => {
     //prefix 
     const linkPrefix = 'https://slaiz.link'
     const dayOfWeek = new Date().toString().split(' ')[0]
@@ -18,7 +18,7 @@ const shortenUrl = (url) => {
         case  "Wed" : 
         day = "W"
         break
-        case "Thur" : 
+        case "Thu" : 
         day = "TR"
         break 
         case "Fri" : 
@@ -79,14 +79,19 @@ const shortenUrl = (url) => {
     //year logic 
     const year = `K${yearOfCentury.slice(2)}`
     totalLinksModel.findByIdAndUpdate("63507feb698ec17032428611", {$inc : {totalLinks : 1}}, (err, docs) => {
-    if(err) return console.log(err)
-    const shrinkedLink = `${linkPrefix}/${day}${month}${year}${docs.totalLinks ++}`
-    const newLink = new urlModel({
-        originalLink : url.data, 
-        shortenedLink : shrinkedLink
-    })
-    newLink.save() 
-    })
+            if(err) return console.log(err)
+            const shrinkedLink = `${linkPrefix}/${day}${month}${year}${docs.totalLinks ++}`
+            const newLink = new urlModel({
+                originalLink : req.body.data, 
+                shortenedLink : shrinkedLink
+            })
+            newLink.save() 
+            res.status(200).json({
+                originalLink : req.body.data, 
+                shrinkedLink : shrinkedLink
+            })
+        })
+    
 }
 module.exports = shortenUrl
 
