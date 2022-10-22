@@ -1,8 +1,9 @@
 const mongoose = require('mongoose')
+require('dotenv').config() 
+const MONGO_URI = process.env.MONGO_URI
 const connectDatabase = async () => {
-    const uri = 'mongodb+srv://admin:admin@cluster0.rnti4kn.mongodb.net/slaiz-links?retryWrites=true&w=majority'
     try{
-        await mongoose.connect(uri, () => {
+        await mongoose.connect(MONGO_URI, () => {
             console.log('Database connected')
         })
     }catch(err){
