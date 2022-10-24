@@ -14,7 +14,8 @@ const Navbar = () => {
             </div>
             <ul class=""> 
                 <li class="inline-block text-sm md:text-lg font-semibold cursor-pointer hover:text-blue-800 transition ml-4"><Link to="/shrink-url">Shrink Link</Link> </li>
-                <li class="inline-block text-sm md:text-lg font-semibold cursor-pointer hover:text-blue-800 transition ml-4"><Link to="/upload-file">Upload File</Link> </li>
+                {/* <li class="inline-block text-sm md:text-lg font-semibold cursor-pointer hover:text-blue-800 transition ml-4"><Link to="/upload-file">Upload File</Link> </li> */}
+                <li class="inline-block text-sm md:text-lg font-semibold cursor-pointer hover:text-blue-800 transition ml-4"><Link to="/contact">Contact</Link> </li>
             </ul>
         </nav>
     )
